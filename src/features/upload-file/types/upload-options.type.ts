@@ -99,6 +99,16 @@ export type UploadOptions = {
    */
   multiple?: boolean,
 
+  /**
+    * Override name with aws link
+    */
+  overrideWithLink?: boolean;
+
+  /**
+    * Region for override
+    */
+  region?: string;
+
   /** Validation rules */
   validation?: {
     /**
@@ -116,7 +126,7 @@ export type UploadOptionsWithDefault = {
   properties: Exclude<UploadOptions['properties'], 'filePath' | 'file' | 'filesToDelete'> & {
     filePath: string,
     file: string,
-    filesToDelete: string
+    filesToDelete: string,
   }
 } & Exclude<UploadOptions, 'properties'>
 

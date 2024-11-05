@@ -16,7 +16,7 @@ export const updateRecordFactory = (
   uploadOptionsWithDefault: UploadOptionsWithDefault,
   provider: BaseProvider,
 ): After<RecordActionResponse> => {
-  const { properties, uploadPath, multiple } = uploadOptionsWithDefault
+  const { properties, uploadPath, multiple, overrideWithLink, region } = uploadOptionsWithDefault
 
   const updateRecord = async (
     response: RecordActionResponse,
@@ -113,8 +113,10 @@ export const updateRecordFactory = (
 
         await provider.upload(uploadedFile, key, context)
 
+        const awsPathKey = `https://${provider.bucket}.s3.${region}.amazonaws.com/${key}`
+
         const params = {
-          [properties.key]: key,
+          [properties.key]: overrideWithLink ? awsPathKey : key,
           ...properties.bucket && { [properties.bucket]: provider.bucket },
           ...properties.size && { [properties.size]: uploadedFile.size?.toString() },
           ...properties.mimeType && { [properties.mimeType]: uploadedFile.type },
