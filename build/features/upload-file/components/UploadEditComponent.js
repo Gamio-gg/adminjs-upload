@@ -51,14 +51,14 @@ const Edit = ({ property, record, onChange }) => {
                 mimeTypes: custom.mimeTypes,
                 maxSize: custom.maxSize,
             }, files: filesToUpload }),
-        !custom.multiple && key && path && !filesToUpload.length && file !== null && (React.createElement(DropZoneItem, { filename: key, src: path, onRemove: handleRemove })),
+        !custom.multiple && key && path && !filesToUpload.length && file !== null && (React.createElement(DropZoneItem, { filename: key, src: key, onRemove: handleRemove })),
         custom.multiple && key && key.length && path ? (React.createElement(React.Fragment, null, key.map((singleKey, index) => {
             // when we remove items we set only path index to nulls.
             // key is still there. This is because
             // we have to maintain all the indexes. So here we simply filter out elements which
             // were removed and display only what was left
             const currentPath = path[index];
-            return currentPath ? (React.createElement(DropZoneItem, { key: singleKey, filename: singleKey, src: path[index], onRemove: () => handleMultiRemove(singleKey) })) : '';
+            return currentPath ? (React.createElement(DropZoneItem, { key: singleKey, filename: singleKey, src: singleKey, onRemove: () => handleMultiRemove(singleKey) })) : '';
         }))) : ''));
 };
 export default Edit;
