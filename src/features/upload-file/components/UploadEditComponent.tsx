@@ -75,7 +75,7 @@ const Edit: FC<EditPropertyProps> = ({ property, record, onChange }) => {
         files={filesToUpload}
       />
       {!custom.multiple && key && path && !filesToUpload.length && file !== null && (
-        <DropZoneItem filename={key} src={path} onRemove={handleRemove} />
+        <DropZoneItem filename={key} src={key} onRemove={handleRemove} />
       )}
       {custom.multiple && key && key.length && path ? (
         <>
@@ -89,7 +89,7 @@ const Edit: FC<EditPropertyProps> = ({ property, record, onChange }) => {
               <DropZoneItem
                 key={singleKey}
                 filename={singleKey}
-                src={path[index]}
+                src={singleKey}
                 onRemove={() => handleMultiRemove(singleKey)}
               />
             ) : ''
