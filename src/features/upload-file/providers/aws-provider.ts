@@ -69,6 +69,9 @@ export class AWSProvider extends BaseProvider {
       Key: key,
       Body: tmpFile,
     }
+    if (file.type) {
+      params.ContentType = file.type
+    }
     if (!this.expires) {
       params.ACL = 'public-read'
     }
